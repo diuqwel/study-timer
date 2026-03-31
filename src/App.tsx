@@ -269,6 +269,13 @@ async function handleStop() {
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <input value={tag} onChange={(e) => handleTagChange(e.target.value)} placeholder="タグ" list="tag-options" />
           
+          {/* 💡 追加：過去に使ったタグの候補リスト（HTML標準機能） */}
+          {/* 💡 ここを追加：これだけで「すべての過去タグ」が候補に出ます */}
+          <datalist id="tag-options">
+            {uniqueTags.map(t => (
+              <option key={t} value={t} />
+            ))}
+          </datalist>
           {/* 💡 メモ入力欄の追加 */}
           <textarea 
             value={memo} 

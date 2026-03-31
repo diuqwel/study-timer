@@ -11,16 +11,43 @@ export function Settings({ currentSettings, onSave, onClose }: Props) {
   const [level1, setLevel1] = useState(currentSettings.level1);
   const [level2, setLevel2] = useState(currentSettings.level2);
   const [level3, setLevel3] = useState(currentSettings.level3);
+  
+  // 💡 状態管理：保存完了フラグと、元に戻すためのバックアップ
+  const [isSaved, setIsSaved] = useState(false);
+  const [backup, setBackup] = useState<ThresholdSettings | null>(null);
 
   const handleSave = () => {
-    // 💡 通知設定はApp.tsx側に移したので、既存の値をそのまま保持します
+    // 💡 保存前の現在の設定（親コンポーネントの状態）をバックアップとして保持
+    setBackup({ ...currentSettings });
+    
     onSave({ 
       level1, 
       level2, 
       level3, 
       notificationInterval: currentSettings.notificationInterval 
     });
-    onClose(); 
+    
+    setIsSaved(true);
+
+    // 💡 3秒経ったらボタンの表示だけを「設定を保存」に戻す
+    setTimeout(() => {
+      setIsSaved(false);
+    }, 3000);
+  };
+
+  const handleUndo = () => {
+    if (backup) {
+      // 💡 バックアップしていた値を親に送って上書きし直す
+      onSave(backup);
+      
+      // 入力フォームの値もバックアップ時のものに戻す
+      setLevel1(backup.level1);
+      setLevel2(backup.level2);
+      setLevel3(backup.level3);
+      
+      setIsSaved(false);
+      setBackup(null);
+    }
   };
 
   return (
@@ -28,7 +55,6 @@ export function Settings({ currentSettings, onSave, onClose }: Props) {
       <div className="card">
         <h1>アプリ設定</h1>
         
-        {/* --- カレンダー設定 --- */}
         <section style={{ marginBottom: "30px" }}>
           <h2>カレンダーの色分け（時間）</h2>
           <div style={{ marginBottom: "15px" }}>
@@ -45,15 +71,41 @@ export function Settings({ currentSettings, onSave, onClose }: Props) {
           </div>
         </section>
 
-        <div style={{ marginTop: "30px", display: "flex", gap: "10px" }}>
-          <button className="btn-primary" onClick={handleSave}>設定を保存</button>
-          <button onClick={onClose}>キャンセル</button>
+        <div style={{ marginTop: "30px", display: "flex", alignItems: "center", gap: "15px" }}>
+          {/* 💡 保存ボタンの表示切り替え */}
+          <button 
+            className="btn-primary" 
+            onClick={handleSave}
+            disabled={isSaved}
+            style={isSaved ? { backgroundColor: "#10b981", boxShadow: "none", border: "none" } : {}}
+          >
+            {isSaved ? "✅ 保存しました" : "設定を保存"}
+          </button>
+
+          {/* 💡 取り消し（Undo）用のアクションを表示 */}
+          {isSaved && (
+            <button 
+              onClick={handleUndo}
+              style={{ 
+                background: "none", 
+                border: "none", 
+                color: "#f97316", 
+                textDecoration: "underline", 
+                cursor: "pointer",
+                boxShadow: "none",
+                padding: 0
+              }}
+            >
+              取り消す
+            </button>
+          )}
+          
+          {!isSaved && <button onClick={onClose}>閉じる</button>}
         </div>
 
-        {/* 💡 ソフトのバージョン情報を追加 */}
         <div style={{ marginTop: "40px", textAlign: "center", color: "#94a3b8", fontSize: "14px" }}>
           <p>Study Timer</p>
-          <p>Version 1.0.1</p>
+          <p>Version 1.2.0</p>
         </div>
       </div>
     </div>

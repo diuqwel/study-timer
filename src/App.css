@@ -1,19 +1,18 @@
-/* 💡 プロっぽさを出すための「変数（ルール）」 */
+/* 💡 プロっぽさを出すための「変数（ルール）」：ポップで元気な色合いにチェンジ！ */
 :root {
-  --bg-color: #f8fafc; /* ほんのり青みがかった清潔感のある背景 */
+  --bg-color: #fff7ed; /* ほんのり温かいオレンジ系の背景 */
   --card-bg: #ffffff;
-  --primary: #0f172a; /* トレンドのシックなダークネイビー */
-  --primary-hover: #334155;
+  --primary: #f97316; /* メインカラーは元気なビビッドオレンジ */
+  --primary-hover: #ea580c;
   --danger: #ef4444;
-  --text-main: #0f172a; /* 真っ黒ではなく、少しだけ色を入れると垢抜けます */
-  --text-muted: #64748b;
-  --border: rgba(226, 232, 240, 0.8); /* 枠線は極力薄く上品に */
-  --radius: 16px; /* 丸みを少し大きくして親しみやすく */
+  --text-main: #431407; /* テキストも真っ黒ではなく、温かみのあるこげ茶色に */
+  --text-muted: #78716c;
+  --border: rgba(253, 186, 116, 0.4); /* 枠線も少し温かい色に */
+  --radius: 24px; /* 丸みをさらに大きくして、おもちゃのような可愛さを出す */
   
-  /* 💡 魔法その1：何層にも重なるフワッとした影 */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
-  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 4px rgba(249, 115, 22, 0.05);
+  --shadow-md: 0 8px 16px rgba(249, 115, 22, 0.08);
+  --shadow-hover: 0 12px 24px rgba(249, 115, 22, 0.12);
 }
 
 body {
@@ -21,63 +20,71 @@ body {
   color: var(--text-main);
 }
 
+/* ==================================================
+   基本レイアウト（PC・タブレット向けの大画面設定）
+   ================================================== */
 .app-container {
   max-width: 800px;
-  margin: 60px auto; /* 上下の余白を広げて窮屈さをなくす */
+  margin: 60px auto; 
   padding: 0 24px;
 }
 
-/* 💡 カード型の枠組み（影と枠線を上品に） */
 .card {
   background: var(--card-bg);
   border-radius: var(--radius);
-  padding: 32px; /* 余白をたっぷりとるのが有料アプリの鉄則 */
+  padding: 32px; 
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border); /* 少し太めの枠線でポップさを強調 */
   margin-bottom: 24px;
-  transition: box-shadow 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* 💡 ヘッダー */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 40px;
 }
+/* 💡 タイトルを「カッコよく」する設定 */
 .header h1 {
   font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.02em; /* 文字の間隔を少し詰めてスタイリッシュに */
+  font-weight: 900; /* 極太にしてロゴ感を出す */
+  letter-spacing: -0.05em;
+  /* オレンジ系のグラデーション */
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* 軽い影を付けて浮き上がらせる */
+  filter: drop-shadow(0 2px 4px rgba(249, 115, 22, 0.2));
+  white-space: nowrap; /* 💡絶対に改行させないおまじない */
 }
 
-/* 💡 入力欄・セレクトボックス（フォーカス時に綺麗に光るように） */
-input, select {
-  padding: 12px 16px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+input, select, textarea {
+  padding: 14px 16px;
+  border-radius: 16px; /* 丸みを強調 */
+  border: 2px solid var(--border);
   font-size: 16px;
   outline: none;
-  background-color: #f8fafc; /* 少し色をつけて入力エリアを明確に */
+  background-color: #fff7ed;
+  font-family: inherit; /* ポップなフォントを引き継ぐ */
   transition: all 0.2s ease;
 }
-input:focus, select:focus {
+input:focus, select:focus, textarea:focus {
   background-color: #ffffff;
-  border-color: #cbd5e1;
-  box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.05); /* Appleのような上品なフォーカスリング */
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
 }
 
-/* 💡 ボタンのかっこいいスタイル */
 button {
   background-color: var(--card-bg);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   color: var(--text-main);
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 12px 24px;
+  border-radius: 16px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* ヌルッとした動き */
+  font-weight: 700;
+  font-size: 15px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); 
   box-shadow: var(--shadow-sm);
   display: inline-flex;
   align-items: center;
@@ -85,43 +92,41 @@ button {
   gap: 8px;
 }
 button:hover:not(:disabled) {
-  background-color: #f8fafc;
-  transform: translateY(-1px); /* ホバーで少しだけ浮き上がる */
+  background-color: #fff7ed;
+  transform: translateY(-2px); 
   box-shadow: var(--shadow-md);
 }
 button:active:not(:disabled) {
-  transform: translateY(0); /* クリックすると沈み込む */
+  transform: translateY(1px); 
 }
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none;
+  transform: none;
 }
 
-/* 💡 メインボタン（一番目立たせるボタン） */
 button.btn-primary {
   background-color: var(--primary);
   color: white;
   border: none;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2); /* メインボタン専用の強めの影 */
+  box-shadow: 0 6px 16px rgba(249, 115, 22, 0.3); 
 }
 button.btn-primary:hover:not(:disabled) {
   background-color: var(--primary-hover);
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.3);
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
 }
 
 button.btn-danger {
-  background-color: transparent;
+  background-color: #fef2f2;
   color: var(--danger);
   border-color: rgba(239, 68, 68, 0.3);
-  box-shadow: none;
 }
 button.btn-danger:hover {
-  background-color: #fef2f2;
-  border-color: var(--danger);
+  background-color: var(--danger);
+  color: white;
 }
 
-/* 💡 ダッシュボード（数字を美しく見せる） */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -133,58 +138,22 @@ button.btn-danger:hover {
   padding: 24px;
   border-radius: var(--radius);
   box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.stat-card:hover {
-  transform: translateY(-4px); /* マウスを乗せるとフワッと浮く */
-  box-shadow: var(--shadow-hover);
 }
 .stat-card h2 {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
   margin: 0 0 12px 0;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-weight: 700;
 }
 .stat-card p {
-  font-size: 42px; /* 数字をさらに大きく堂々と */
+  font-size: 42px; 
   font-weight: 800;
   margin: 0;
-  letter-spacing: -0.03em;
-}
-.stat-card .today-val { color: var(--text-main); }
-.stat-card .month-val { color: var(--text-main); }
-
-/* 💡 アニメーション（ピコンピコン） */
-.recording-indicator {
-  display: inline-flex;
-  align-items: center;
-  color: var(--danger);
-  font-weight: 600;
-  font-size: 16px;
-  gap: 12px;
-  margin: 24px 0;
-  padding: 12px 20px;
-  background-color: #fef2f2; /* アラート全体に薄い背景を敷く */
-  border-radius: 50px; /* 完全な丸み */
-}
-.recording-dot {
-  width: 10px;
-  height: 10px;
-  background-color: var(--danger);
-  border-radius: 50%;
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; /* より滑らかな点滅 */
-}
-@keyframes pulse {
-  0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
-  50% { transform: scale(1.2); box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-  100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+  color: var(--primary); /* 数字もポップな色に */
 }
 
-/* 💡 履歴リスト */
 .history-list {
   list-style: none;
   padding: 0;
@@ -192,75 +161,140 @@ button.btn-danger:hover {
 }
 .history-list li {
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: 2px solid var(--border);
+  border-radius: 20px;
   padding: 20px;
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; /* 上揃えにしてレイアウトを崩れにくく */
+  align-items: flex-start; 
   flex-wrap: wrap;
   gap: 16px;
-  transition: all 0.2s ease;
-}
-.history-list li:hover {
-  box-shadow: var(--shadow-md);
-  border-color: #cbd5e1;
 }
 .history-tag {
-  background-color: #f1f5f9;
-  color: #334155;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  background-color: #ffedd5;
+  color: #c2410c;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .history-memo {
-  background-color: #f8fafc;
-  border-left: 3px solid #cbd5e1;
+  background-color: #fff7ed;
+  border-left: 4px solid var(--primary);
   padding: 12px 16px;
   margin-top: 8px;
   font-size: 14px;
-  color: #475569;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  border-radius: 0 8px 8px 0;
-  width: 100%; /* メモがしっかり幅を取るように */
+  font-weight: 600;
+  color: var(--text-main);
+  border-radius: 0 12px 12px 0;
+  width: 100%; 
   box-sizing: border-box;
 }
 
-/* 💡 スクロールバーを細く、目立たなくする魔法 */
-::-webkit-scrollbar {
-  width: 8px; /* スクロールバーの幅を細く */
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: transparent; /* レール部分は透明に */
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1; /* つまみ部分は控えめなグレー */
-  border-radius: 10px; /* 角を丸く */
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; /* マウスを乗せたら少し濃くする */
-}
-
-/* 💡 パソコンやスマホが「ダークモード」の時に自動で発動する魔法 */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #0f172a;       /* 深い紺色の背景 */
-    --card-bg: #1e293b;        /* カードは少しだけ明るい紺色 */
-    --text-main: #f8fafc;      /* 文字は真っ白ではなく少し抑えた白 */
-    --text-muted: #94a3b8;     /* 補助テキストはグレー */
-    --border: rgba(255, 255, 255, 0.1); /* 枠線も半透明の白に */
-    --primary: #3b82f6;        /* ボタンなどの青色を少し明るくして目立たせる */
+/* ==================================================
+   📱 iPhone 15（スマホ）向けの最適化
+   ここから下のルールは、画面幅が768px以下の時だけ発動します
+   （C++の if (width <= 768) と同じです）
+   ================================================== */
+/* ==================================================
+   📱 iPhone 15 / 12 Pro（スマホ）向けの最適化
+   ================================================== */
+@media (max-width: 768px) {
+  /* 全体の余白を詰めて画面を広く使う */
+  .app-container {
+    margin: 16px auto;
+    padding: 0 12px;
+  }
+  .card {
+    padding: 16px;
+    border-radius: 20px;
   }
 
-  /* 入力欄の背景も暗くする */
-  input, select {
-    background-color: #0f172a;
-    color: #f8fafc;
+  /* 💡 1. ヘッダーと「設定」ボタンの渋滞を解消 */
+  .header {
+    margin-bottom: 24px;
+    gap: 8px; /* タイトルとボタンの隙間を小さく */
+    flex-wrap: nowrap; /* 絶対に折り返さない */
+  }
+  .header h1 {
+    font-size: 21px; /* ギリギリ1行に収まるカッコいいサイズ */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* 万が一はみ出たら「...」で逃がす */
+  }
+  .header button {
+    width: auto !important; /* スマホでもボタンを画面横幅いっぱいに「しない」 */
+    padding: 8px 12px !important; /* コンパクトに */
+    font-size: 13px !important;
+    flex-shrink: 0; /* 💡ここが魔法：タイトルに押し潰されるのを絶対防御する */
+    white-space: nowrap;
+  }
+
+  /* 💡 2. 合計時間（ダッシュボード）が2行になるのを防ぐ */
+  .stats-grid {
+    gap: 10px; /* カード同士の隙間を狭くしてスペースを稼ぐ */
+  }
+  .stat-card {
+    padding: 16px 8px; /* 左右の余白を極限まで削る */
+  }
+  .stat-card h2 {
+    font-size: 11px; /* ラベル（本日の合計時間など）を小さく */
+    margin-bottom: 6px;
+    white-space: nowrap;
+  }
+  .stat-card p {
+    font-size: 18px; /* 「12時間 30分」が1行で入る限界サイズ */
+    white-space: nowrap; /* 絶対に2行にしない */
+  }
+
+  /* 💡 3. メイン操作部のボタンや入力欄はフル幅にして押しやすく */
+  .card > div > div[style*="display: flex"] {
+    flex-direction: column;
+  }
+  /* ただし、履歴の細かいボタン類はフル幅にしない */
+  .card button:not(.header button) {
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+  }
+  .history-list button {
+    width: auto !important;
+  }
+
+  /* セレクトボックスの文字切れ対策 */
+  select, input[type="date"], input[type="number"], input[type="datetime-local"], textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 13px !important;
+    padding: 10px 8px !important;
+  }
+
+  /* カレンダー（表）の横スクロールと文字サイズ */
+  .card[style*="overflow: hidden"] > div,
+  table {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch; /* 指に吸い付く滑らかなスクロール */
+    white-space: nowrap; /* 表の文字が折り返して不格好に縦長になるのを防ぐ */
+  }
+  table th, table td, .calendar-day {
+    font-size: 12px !important;
+    padding: 6px 4px !important;
+  }
+
+  /* 履歴リストのレイアウト調整 */
+  .history-list li {
+    padding: 16px 12px;
+  }
+  .history-list li > div {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+  }
+  .history-list li > div > div:last-child {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
   }
 }
