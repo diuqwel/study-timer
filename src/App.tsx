@@ -188,8 +188,9 @@ async function handleStop() {
     }
     setStartTime(session.start);
     setTag(session.tag);
+    setMemo(session.memo || "");
     setIsRunning(true);
-    localStorage.setItem(RUNNING_KEY, JSON.stringify({ startTime: session.start, tag: session.tag }));
+    localStorage.setItem(RUNNING_KEY, JSON.stringify({ startTime: session.start, tag: session.tag, memo: session.memo || "" }));
     await handleDeleteSession(session.id);
   }
 

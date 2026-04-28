@@ -105,7 +105,7 @@ export function Settings({ currentSettings, onSave, onClose }: Props) {
 
         <div style={{ marginTop: "40px", textAlign: "center", color: "#94a3b8", fontSize: "14px" }}>
           <p>Study Timer</p>
-          <p>Version 1.2.0</p>
+          <p>Version 1.3.0</p>
         </div>
       </div>
     </div>

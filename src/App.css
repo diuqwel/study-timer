@@ -194,6 +194,49 @@ button.btn-danger:hover {
 }
 
 /* ==================================================
+   💡 計測中（記録中）のド派手な強調アニメーション
+   ================================================== */
+.recording-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background-color: #fef2f2; /* 薄い赤の背景で警告色を出す */
+  color: #dc2626; /* 濃い赤文字で目立たせる */
+  padding: 16px;
+  border-radius: var(--radius);
+  border: 2px solid #fca5a5;
+  font-weight: 900; /* 極太文字 */
+  font-size: 22px;
+  margin-bottom: 24px;
+  /* 全体が脈打つ（呼吸する）アニメーションを2秒周期で無限ループ */
+  animation: pulse-bg 2s ease-in-out infinite; 
+}
+
+.recording-dot {
+  width: 16px;
+  height: 16px;
+  background-color: #ef4444; /* 真っ赤な録画マーク */
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8); /* 光のオーラを纏わせる */
+  /* 赤丸がチカチカ点滅するアニメーションを1秒周期で無限ループ */
+  animation: blink 1s infinite; 
+}
+
+/* 💡 C++の whileループ+Sleep に相当する、CSSのアニメーション定義 */
+@keyframes pulse-bg {
+  0%   { transform: scale(1);    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1); }
+  50%  { transform: scale(1.02); box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3); } /* 少し大きくなる */
+  100% { transform: scale(1);    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1); }
+}
+
+@keyframes blink {
+  0%   { opacity: 1;   transform: scale(1); }
+  50%  { opacity: 0.3; transform: scale(0.8); } /* 半透明になって少し縮む */
+  100% { opacity: 1;   transform: scale(1); }
+}
+
+/* ==================================================
    📱 iPhone 15（スマホ）向けの最適化
    ここから下のルールは、画面幅が768px以下の時だけ発動します
    （C++の if (width <= 768) と同じです）
